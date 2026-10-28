@@ -28,7 +28,7 @@ jobs:
       - run: alembic -c apps/api/alembic.ini upgrade head
       - run: alembic -c apps/api/alembic.ini check
       - run: pytest apps/api/tests tests -q
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
       - run: npm --prefix apps/web ci
