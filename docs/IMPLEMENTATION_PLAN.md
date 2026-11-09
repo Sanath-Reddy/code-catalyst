@@ -12,7 +12,7 @@ Success means the workflow is reliable and understandable with unfamiliar drafts
 
 ## 2. Requirements and scope decisions
 
-Source precedence: the problem statement defines the problem and general rules; `round 2.txt` supplies this stage's exact deliverables and timing; `CODE CATALYST.pdf` is the team's prior commitment and must have an explicit change log. Round 1 and Round 3 submission requirements apply to their own stages. The original problem statement calls the capability list suggested; this plan adopts the capabilities the team's proposal actually committed to.
+Source precedence: the problem statement defines the problem and general rules; `docs/archive/round2.txt` supplies this stage's exact deliverables and timing; `CODE CATALYST.pdf` is the team's prior commitment and must have an explicit change log. Round 1 and Round 3 submission requirements apply to their own stages. The original problem statement calls the capability list suggested; this plan adopts the capabilities the team's proposal actually committed to.
 
 | Round 2 delivery | Concrete boundary |
 |---|---|

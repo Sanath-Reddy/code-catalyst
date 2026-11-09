@@ -5,8 +5,8 @@ import pytest
 
 
 def test_compose_file_exists_and_declares_services():
-    compose_path = Path("infra/docker-compose.yml")
-    assert compose_path.exists(), "infra/docker-compose.yml must exist"
+    compose_path = Path("infra/compose.yaml")
+    assert compose_path.exists(), "infra/compose.yaml must exist"
     content = compose_path.read_text(encoding="utf-8")
     assert "postgres:" in content
     assert "api:" in content

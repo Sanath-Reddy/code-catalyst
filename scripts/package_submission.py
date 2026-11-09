@@ -14,16 +14,17 @@ from verify_plan import check_plan, check_release
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = (
-    'README.md', 'Problem_statement.txt', 'round 2.txt', 'CODE CATALYST.pdf',
+    'README.md', 'docs/archive/Problem_statement.txt', 'docs/archive/round2.txt', 'CODE CATALYST.pdf',
     'docs/ARCHITECTURE.md', 'docs/COMPLETED_FEATURES.md',
     'docs/CHANGELOG_FROM_ROUND1.md', 'docs/CONTRIBUTIONS.md', 'docs/DISCLOSURES.md',
     'docs/ROUND3_IMPROVEMENTS.md', 'docs/SUBMISSION_STATUS.md',
     'docs/IMPLEMENTATION_PLAN.md', 'docs/DEPLOYMENT_AND_SUBMISSION.md',
-    'docs/VERIFICATION.md', 'docs/SANATH_PROGRESS.md', 'docs/DARSHIL_PROGRESS.md',
-    'docs/S2_HANDOFF.md', 'docs/S3_HANDOFF.md', 'docs/S4_HANDOFF.md', 'docs/S5_HANDOFF.md',
-    "Surya's handoff/P1_HANDOFF.md", "Surya's handoff/P2_HANDOFF.md",
-    "Surya's handoff/P3_HANDOFF.md", "Surya's handoff/P4_HANDOFF.md",
-    "Surya's handoff/P5_HANDOFF.md", "Surya's handoff/P6_HANDOFF.md",
+    'docs/VERIFICATION.md', 'docs/archive/SANATH_PROGRESS.md', 'docs/archive/DARSHIL_PROGRESS.md',
+    'docs/archive/handoffs/S2_HANDOFF.md', 'docs/archive/handoffs/S3_HANDOFF.md',
+    'docs/archive/handoffs/S4_HANDOFF.md', 'docs/archive/handoffs/S5_HANDOFF.md',
+    'docs/archive/handoffs/P1_HANDOFF.md', 'docs/archive/handoffs/P2_HANDOFF.md',
+    'docs/archive/handoffs/P3_HANDOFF.md', 'docs/archive/handoffs/P4_HANDOFF.md',
+    'docs/archive/handoffs/P5_HANDOFF.md', 'docs/archive/handoffs/P6_HANDOFF.md',
     'docs/MODEL_PLAN.md', 'docs/CONTRACTS.md',
 
     'contracts/openapi.json', 'apps/api/README.md', 'apps/web/README.md',

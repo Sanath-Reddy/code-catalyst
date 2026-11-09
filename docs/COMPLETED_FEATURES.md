@@ -31,7 +31,7 @@ S6 inventory at `b5999b2`, 23 October 2026. “Implemented” below identifies c
 
 ## Results that can be reported now
 
-- S5 recorded **133 combined backend/engine/P3 worker tests passed**, six planning-verifier cases passed, a successful TypeScript/Vite production build and no Alembic schema drift. These are local development results, not remote CI or final release-SHA certification; see [S5 handoff](S5_HANDOFF.md).
+- S5 recorded **133 combined backend/engine/P3 worker tests passed**, six planning-verifier cases passed, a successful TypeScript/Vite production build and no Alembic schema drift. These are local development results, not remote CI or final release-SHA certification; see [S5 handoff](archive/handoffs/S5_HANDOFF.md).
 - [Live synthetic evidence](../verification/evidence/s5-live-smoke.json): one original run with four findings and one corrected run with zero, separate-identity approval and exact export. Total review times were 8,720 ms and 5,425 ms. Two observations do not establish p95 latency, precision or recall.
 - That smoke records a dirty tree and its base commit. It must retain that provenance rather than be relabelled as an execution against `b5999b2` or a future release.
 

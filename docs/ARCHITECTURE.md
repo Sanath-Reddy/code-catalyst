@@ -57,4 +57,4 @@ The current role model has one role per workspace membership. Tenant constraints
 
 The planned same-origin deployment is Caddy + static SPA + API + worker + persistent PostgreSQL on a team-controlled host. No `infra/` deployment, verified public URL, encrypted-backup evidence or restoration record exists at this baseline. API readiness checks schema/DB, not worker heartbeat or model health. A worker heartbeat, proxy-aware client identification, operational monitoring, private uploads, retention/deletion and backup expiry still need implementation/verification.
 
-See [S5 evidence](S5_HANDOFF.md), [disclosures](DISCLOSURES.md), [feature status](COMPLETED_FEATURES.md) and [submission coordination](SUBMISSION_STATUS.md). None of these documents establishes deployment readiness.
+See [S5 evidence](archive/handoffs/S5_HANDOFF.md), [disclosures](DISCLOSURES.md), [feature status](COMPLETED_FEATURES.md) and [submission coordination](SUBMISSION_STATUS.md). None of these documents establishes deployment readiness.

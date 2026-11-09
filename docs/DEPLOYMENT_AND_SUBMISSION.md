@@ -69,7 +69,7 @@ The canonical local command is `docker compose --env-file .env -f infra/compose.
 Set `POSTGRES_PASSWORD`, `APP_ENV=development`, and `PUBLIC_ORIGIN=http://localhost:3000`.
 The stack runs migrations before services, installs the API dependency lock,
 passes model settings to workers, and exposes only the localhost web port.
-`infra/docker-compose.yml` is a compatibility copy; keep it equal to `compose.yaml`.
+`infra/compose.yaml` is the Docker Compose file.
 
 For a real host, set `APP_ENV=production`, `PUBLIC_ORIGIN=https://your.domain`,
 `SITE_ADDRESS=your.domain`, point DNS to the host, and use both Compose files:
