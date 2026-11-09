@@ -2,103 +2,83 @@
 
 **Check the copy. Follow the evidence. Approve the exact revision.**
 
-BrandGuard is a pre-publication review workspace for marketing campaigns. It checks draft copy against a brand’s approved guidelines, connects findings to source evidence, and brings a separate human reviewer into the approval process. Local rule checks handle supported structured rules; Nebius adds semantic review for applicable tone, messaging, and claims rules.
+BrandGuard is a pre-publication review workspace for marketing campaigns. It checks draft copy and ad graphics against a brand's approved guidelines, links every finding to its source evidence, and puts a separate human reviewer in charge of the final approval. Local checks cover terminology, structured facts, numbers, and image text. Nebius adds semantic review for tone, messaging, and claims rules.
 
 **[Open the hosted demo →](https://code-catalyst-tau.vercel.app/)**
 
-No installation is needed to judge the hosted website. Start as a **creator**, explore the **manager’s rules**, review the campaign as a **reviewer**, and finish with the **admin’s Nebius controls**. The floating **Judge guide** on the website contains the same account details and instructions, both before and after login. Hover over it on desktop, or click/tap it to open.
+Judges don't need to install anything. On the sign-in page, click **Try a private demo**. You get your own fictional LumaDesk workspace with sample campaigns already in it, and you can switch roles from the top bar. The floating **Judge guide** has the walkthrough and a **Round 3 missions** tab, before and after you sign in.
 
-[Demo accounts](#demo-accounts) · [Judge walkthrough](#judge-walkthrough) · [Troubleshooting](#troubleshooting) · [Run locally](#run-locally) · [Architecture](#architecture) · [Testing](#testing)
+[Hosted demo](#hosted-demo) · [Judge walkthrough](#judge-walkthrough) · [Features](#what-the-project-supports) · [Run locally](#run-locally) · [Architecture](#architecture) · [Evaluation](#evaluation) · [Testing](#testing)
 
-## Demo accounts
+## Hosted demo
 
-Use these accounts at **https://code-catalyst-tau.vercel.app/**.
+### Private demo (recommended)
 
-| Field | What to enter |
+1. Open **https://code-catalyst-tau.vercel.app/**.
+2. Click **Try a private demo** and pick a role to start with.
+3. Use the role switcher in the top bar to move between **Creator**, **Reviewer**, **Manager**, **Brand lead**, and **Admin**. Each role is a separate identity in the same sandbox, so approvals stay independent of the creator.
+
+Sandboxes come from a ready pool, so they open straight away. Each one has its own analysis budget, so nothing you do touches other judges' work.
+
+### Shared evaluation accounts
+
+You can also use the shared fictional LumaDesk workspace:
+
+| Role | Email |
 |---|---|
-| Email — start here | `creator@lumadesk.test` |
-| Password — shared by all four roles | `BrandGuardAdmin2026!` |
-| Workspace ID — shared by all four roles | `539ad43a-e582-46f0-8d0d-7e483782d5c6` |
+| Creator | `creator@lumadesk.test` |
+| Manager | `manager@lumadesk.test` |
+| Reviewer | `reviewer@lumadesk.test` |
+| Admin | `admin@lumadesk.test` |
 
-| Order | Role | Email | What you will explore |
-|---|---|---|---|
-| 1 | Creator | `creator@lumadesk.test` | Create, analyse, correct, and submit a campaign. |
-| 2 | Manager | `manager@lumadesk.test` | Inspect the approved rules and understand why findings appear. |
-| 3 | Reviewer | `reviewer@lumadesk.test` | Complete outstanding checks, approve, and export. |
-| 4 | Admin | `admin@lumadesk.test` | Control external semantic processing through Nebius. |
+All four use the password `BrandGuardAdmin2026!`. The workspace ID (`539ad43a-e582-46f0-8d0d-7e483782d5c6`) is optional, because sign-in finds the workspace from the email when an account belongs to only one. Give your campaign a unique title so you can find it again, and save before you **Sign out** to switch roles.
 
-These are intentionally shared evaluation accounts for the fictional LumaDesk workspace. Give your campaign a unique title so you can find it again. Save your work before switching roles with **Sign out** in the top bar. A separate browser profile or private window is useful for keeping the creator and reviewer signed in simultaneously.
-
-The local launcher generates its own accounts and workspace ID. For localhost credentials, use `python3 scripts/dev_local.py accounts` instead of the hosted account table above.
+The local launcher generates its own accounts. For localhost, run `python3 scripts/dev_local.py accounts` instead.
 
 ## Judge walkthrough
 
-Follow the four roles in order. Keep the same campaign throughout the creator, manager, and reviewer sections.
+Do these steps in order and keep the same campaign throughout.
 
-### 1. Creator
+### 1. Creator: from rough draft to corrected revision
 
-**Goal: see a rough campaign become a corrected, source-backed revision.**
-
-1. Open the [hosted demo](https://code-catalyst-tau.vercel.app/) and sign in as `creator@lumadesk.test` using the shared password and workspace ID above.
-2. On **Campaigns**, click **Review a campaign**.
-3. Select the **LumaDesk** brand, enter a unique campaign title, and assign `reviewer@lumadesk.test` as the reviewer. Set **Channel** to `email`, **Audience** to `Prospective customers`, and **Purpose** to `Promote a trial`.
-4. Paste this into **Copy Text**:
+1. Click **Review a campaign**. Choose the **LumaDesk** brand, enter a title, and assign the reviewer. Set **Channel** to `email`, **Audience** to `Prospective customers`, and **Purpose** to `Promote a trial`.
+2. Paste this copy, keep **external semantic review** selected, and submit:
 
    ```text
    Lumadesk guarantees 10x productivity. Get your 30-day free trial. Sign up NOW!!!
    ```
 
-5. Keep **external semantic review** selected if it is available. Click **Submit for Compliance Review →** and wait for analysis to finish.
-6. Inspect the findings. The brand spelling and trial duration conflict with the approved rules. When Nebius is enabled, also inspect semantic findings about the performance claim and tone. Model wording and finding counts can vary.
-7. Click **Evidence ↗** on a finding. Read the approved source passage and rule that support it, then close the evidence drawer.
-8. Try **Apply available fixes**, or choose **Edit draft** and replace the copy with:
+3. Look at the findings: the brand spelling and the trial length break approved rules, and Nebius flags the unsupported performance claim and the pushy tone. The model's wording can differ between runs. Click **Evidence ↗** to see the approved passage behind a finding.
+4. Click **Apply available fixes** (this applies only suggestions that are exact drop-in replacements), or click **Edit draft** and enter `Try LumaDesk free for 14 days. Start your trial.`
+5. Click **Save all & recheck**, then **Submit for Review →** and **Confirm Submission →**.
 
-   ```text
-   Try LumaDesk free for 14 days. Start your trial.
-   ```
+You can also upload a **PDF or Word (.docx)** draft (the server extracts it and records page and paragraph provenance), or a **PNG/JPEG ad**. For an ad, local OCR reads the text, you correct it, and findings link back to image regions alongside contrast and brand-palette checks. A scanned PDF can be checked as an image campaign.
 
-9. Click **Save all & recheck**. The changes are saved as a new revision and analysed again. Staged edits are only confirmed after rechecking.
-10. If the current revision has sufficient coverage and no unresolved blockers, click **Submit for Review →**, then **Confirm Submission →**. If submission is blocked by incomplete coverage, keep the campaign for the reviewer section below.
+### 2. Manager: where the rules come from
 
-**Before switching roles:** copy the campaign’s page URL or remember its unique title. If the run says **Local processing only**, continue with the local findings; the reviewer can finish missing checks, and you will explore the Nebius switch as admin at the end.
+1. Open **LumaDesk** under **Your brand library**, choose **Active**, then click **View Rules**.
+2. Compare the rules with the creator's findings:
 
-### 2. Manager
-
-**Goal: understand why those phrases were detected and where the rules come from.**
-
-1. Sign out and sign in as `manager@lumadesk.test` with the same password and workspace ID.
-2. On **Campaigns**, scroll to **Your brand library** and open **LumaDesk**.
-3. Select **Active**, then click **View Rules** on the approved guideline source.
-4. Compare the source text, approved values, and **Evidence Quote** fields with the findings you saw as creator:
-
-| Sample phrase | Approved rule | Why it matters |
+| Sample phrase | Approved rule | Check |
 |---|---|---|
-| `Lumadesk` | The product name is `LumaDesk`. | The terminology check identifies incorrect spelling or capitalization. |
-| `30-day free trial` | The free trial lasts **14 days**. | The stated duration contradicts an approved fact. |
-| `10x productivity` | Performance claims require approved evidence. | Semantic review can flag the unsupported performance promise. |
-| `Sign up NOW!!!` | Use calm language. | Semantic review can flag pressure or tone that conflicts with the guideline. |
+| `Lumadesk` | The product name is `LumaDesk`. | Local terminology |
+| `30-day free trial` | The free trial lasts **14 days**. | Local fact/number |
+| `10x productivity` | Performance claims require approved evidence. | Nebius semantic |
+| `Sign up NOW!!!` | Use calm language. | Nebius semantic |
 
-The application uses these brand-specific rules and source passages as review evidence. Managers can define guidelines for another brand without changing the review interface.
+3. Open **Guideline health** to see which rules get disputed or reported as ambiguous most often. From there you can raise an **improvement request**: attach examples, propose new wording, run a **comparison** of the old rule against the new one on stored campaigns, and send it for peer review. A second manager, such as the **Brand lead**, has to approve the exact draft before it goes live.
+4. When a guideline changes and is published, the **Rechecks** inbox shows the old and new rule and lists every campaign that relied on it. Each campaign is rechecked automatically. Campaigns with a confirmed or likely impact go back to a reviewer. Campaigns with only a possible impact keep their approval, unless the recheck finds something different.
 
-To explore authoring, click **＋ Add guideline source**. A source has a key, title, source text, effective date, and structured rules with exact evidence quotes. Saving creates a draft. Activation uses **Activate Source**, a rationale, an explicit verification checkbox, and **Activate & Advance Epoch**.
-
-For the main walkthrough, inspect the seeded rules and cancel any unfinished source form. Activating a changed source can make an earlier review stale and require a recheck.
+To write a new source, click **＋ Add guideline source**. When `RULE_DRAFTING_ENABLED=1` is set, you can also start from an AI draft of an imported brand book, where every rule's evidence quote is checked against the source text. Activation always needs a rationale and an explicit verification checkbox.
 
 <details>
-<summary>If there is no active source: recreate the fictional test guidelines</summary>
+<summary>If there is no active source: recreate the fictional guideline</summary>
 
-As manager, click **＋ Add guideline source** and enter:
+Source key `brand_guide`, title `LumaDesk synthetic brand rules`, effective date before the next analysis, and source text:
 
-- **Source key:** `brand_guide`
-- **Title:** `LumaDesk synthetic brand rules`
-- **Effective from:** a time before the next analysis
-- **Source text:**
-
-  ```text
-  Write LumaDesk. The free trial lasts 14 days. Performance claims require approved evidence. Use calm language.
-  ```
-
-Add these rules. Evidence quotes must be exact substrings of the source text.
+```text
+Write LumaDesk. The free trial lasts 14 days. Performance claims require approved evidence. Use calm language.
+```
 
 | ID | Category | Kind | Key | Approved value | Evidence quote |
 |---|---|---|---|---|---|
@@ -107,82 +87,62 @@ Add these rules. Evidence quotes must be exact substrings of the source text.
 | C01 | `facts_claims` | `claim_policy` | `promotions` | `Substantiate performance claims.` | `Performance claims require approved evidence.` |
 | G01 | `tone` | `guidance` | `tone` | `Use calm language.` | `Use calm language.` |
 
-Save, activate the source with a rationale and verification, and return as creator to recheck the campaign. The exact fixture is [verification/fixtures/lumadesk.json](verification/fixtures/lumadesk.json).
+The exact fixture is in [verification/fixtures/lumadesk.json](verification/fixtures/lumadesk.json).
 
 </details>
 
-### 3. Reviewer
+### 3. Reviewer: approve the exact revision
 
-**Goal: independently review and approve the exact corrected revision.**
+1. Open the campaign and confirm you are looking at the current, corrected revision.
+2. If **Manual category review** appears, record each outstanding check: tick the source you checked, choose an outcome, and write a rationale of at least 20 characters.
+3. Click **✓ Approve Exact Revision**, write a rationale, then **✓ Confirm Approval**.
+4. Click **⬇ View Approved Export** and download the approved text and the **Audit Record (.json)**.
+5. Open **Verify a record** (linked from the export, or at `/verify`) and upload the JSON. It checks the record against the stored decision, text, evidence and image, and tells you whether the approval is still current.
 
-1. Sign out and sign in as `reviewer@lumadesk.test`.
-2. Search **Campaigns** for the unique title you used, or open the saved campaign URL. Confirm that you are looking at the current, corrected revision and are its assigned reviewer.
-3. Read the findings, their source evidence, and the coverage notice. If **Manual category review** appears:
-   - Select an outstanding category.
-   - Inspect the relevant approved source and select its source checkbox.
-   - Choose the appropriate outcome and enter a rationale of at least **20 characters**.
-   - Click **Record manual check** and repeat for remaining categories.
-   - Use **Not applicable to this revision** only when no approved rule applies to that category.
-4. If blockers remain, inspect their evidence and use the permitted reviewer actions, or return to the creator to correct and recheck the draft.
-5. If the campaign is not yet **IN_REVIEW**, return as creator, open the same campaign, click **Submit for Review →** and **Confirm Submission →**, then switch back to reviewer.
-6. Click **✓ Approve Exact Revision**, enter a rationale of at least **20 characters**, then **✓ Confirm Approval**.
-7. Once the campaign is **APPROVED**, click **⬇ View Approved Export**. Download both **Download approved text (.txt)** and **Download Audit Record (.json)**.
-8. Check that the text matches the approved revision. The JSON audit record includes the text checksum, human decision, and review evidence.
+### 4. Admin: processing policy
 
-The assigned reviewer is a separate identity from the creator. Approval applies to an exact revision; later edits and source changes require fresh checks where applicable.
+Click **Processing policy** in the top bar. It contains:
 
-### 4. Admin
+- The Nebius switch, with a creator disclosure notice and an audit rationale.
+- A provider status card showing the provider, the model, and whether the key is configured.
+- The **retention period**. Inactive campaigns are purged hourly, and a deletion ledger keeps them deleted after a restore.
 
-**Goal: see how the workspace controls Nebius processing.**
-
-1. Sign out and sign in as `admin@lumadesk.test`.
-2. Click **Processing policy** in the top bar.
-3. Inspect the provider, model, and current policy. Toggle **Enable external semantic processing via hosted provider**.
-4. Enter a **Creator Disclosure Notice**, such as `Fictional campaign text, context, and approved guideline passages will be sent to Nebius for semantic review.` Enter an **Administrative Audit Rationale**, such as `Enable Nebius for the Round 2 fictional evaluation.` Click **Save Policy Changes**.
-5. To compare modes, return as creator and start a fresh campaign with the original sample:
-   - **Enabled:** select external semantic review and submit. Applicable tone, messaging, and claims rules can receive Nebius semantic review.
-   - **Disabled:** supported local checks still run. Semantic categories can remain incomplete until the assigned reviewer records manual checks.
-6. Finish with external processing **enabled** so the next judge can try Nebius too.
-
-Nebius also requires a configured server-side API key. Requests send draft text, campaign context, and relevant approved source passages to the provider and may incur normal API charges. The default review selection can be unchecked for an individual local-only run. Changing policy does not rerun old analyses or rewrite an approved export.
+Changing the policy doesn't rerun old analyses or change an approved export. Please leave external processing **enabled** for the next judge.
 
 ## Troubleshooting
 
 | What you see | What to do |
 |---|---|
-| Sign-in fails | Copy all three hosted fields exactly. All four roles share the password and workspace ID. Local accounts are different; retrieve them with the launcher’s `accounts` command. |
-| **Local processing only** | As admin, enable Processing policy. Return as creator, refresh, select external review, and run a new check. |
-| Provider not configured or authentication failed | The deployment owner must check the server’s `NEBIUS_API_KEY`. The browser does not receive that key. |
-| **INCOMPLETE**, even with no findings | Inspect category coverage. Zero findings does not mean all categories completed; the assigned reviewer can record outstanding manual checks. |
-| Messaging is **Not applicable** | The supplied LumaDesk fixture has no messaging rule. This is expected after a successful semantic evaluation. |
-| No sources or no useful findings | Check that the campaign uses LumaDesk and has an active, effective guideline source. Use the manager setup above if needed. |
-| No approval button | Confirm that you are the assigned reviewer, the creator submitted the current revision, and coverage/blocker requirements are satisfied. |
-| A run or approval is stale | Recheck the current revision against the current active sources before continuing. |
-| Analysis fails after the draft saved | Open the saved campaign and retry **Run Compliance Check**. You do not need to create another campaign. |
+| Banner saying the server is waking up | The hosted backend is starting. The page retries on its own. |
+| Sign-in fails | Copy the email and password exactly, or use **Try a private demo**. Local accounts are different: run `python3 scripts/dev_local.py accounts`. |
+| **Local processing only** | As admin, enable the Processing policy. Then run a new check as creator with external review selected. |
+| Provider not configured | The deployment owner must set `NEBIUS_API_KEY` on the API and worker. The browser never receives the key. |
+| **INCOMPLETE** with no findings | Zero findings doesn't mean every category was covered. The reviewer can record the outstanding manual checks. |
+| Image text is empty | The worker needs Tesseract. If `OCR_ENABLED=0`, type the text by hand. |
+| Hourly limit reached | Each member has hourly caps on drafts, analysis runs, and uploads. Wait, or use another role. |
+| No approval button | You must be the assigned reviewer, the current revision must be submitted, and the coverage and blocker requirements must be met. |
+| Run or approval is stale | A guideline changed. Recheck the current revision, or follow it from the **Rechecks** inbox. |
 
 ## What the project supports
 
-- Brand-specific, versioned guideline sources with manager-controlled activation.
-- Pasted text and locally previewed UTF-8 `.txt` / `.md` draft import, up to 256 KiB and 100,000 Unicode characters.
-- Supported deterministic terminology and structured fact checks, plus optional Nebius semantic review.
-- Located findings with source evidence, category coverage, filters, and reasoned dispositions.
-- Multiple staged corrections, undo/discard, revision comparisons, conflict recovery, and unsaved-work protection.
-- Campaign search, pagination, reviewer assignment, and revision-scoped discussion.
-- Separate creator/reviewer identities, manual checks, approval guards, and exact text/JSON exports.
-- A floating judge guide available while signed in or signed out, with desktop, touch, and keyboard controls.
+- **Guidelines.** Versioned guideline sources per brand, with manager-controlled activation and optional allowed and forbidden spellings. AI drafting from a brand book is optional, and every drafted rule is quote-checked.
+- **Intake.** Pasted text, `.txt`/`.md` files, PDF and DOCX imports (up to 10 MB, 50 pages, and 100,000 characters) with file provenance, and PNG/JPEG ad graphics (up to 8 MB) with local OCR.
+- **Checks.** Local terminology, fact, and number checks; image contrast and brand-palette checks per region; and Nebius semantic review. Semantic review retries transient errors and repairs rejected findings once. Proposals that fail validation are shown to the reviewer as unverified suggestions.
+- **Review.** Located findings with evidence, category coverage, filters, dispositions, staged edits with undo, revision diffs, conflict recovery, reviewer assignment, and per-revision discussion.
+- **Approval.** Separate creator and reviewer identities, manual checks, approval tied to an exact revision, text and JSON export, and a page that verifies a downloaded record.
+- **Guideline change.** Each change is recorded with its impact. Only the campaigns that relied on it are reopened, through the Rechecks inbox. Guideline health and improvement requests include a comparison run and peer-reviewed activation.
+- **Operations.** Private demo sandboxes with a role switcher, retention and purge, per-member hourly quotas, strict security headers (CSP, HSTS), health endpoints that report the migration head, the worker heartbeat, and the deployed commit, and a synthetic journey that runs every 30 minutes.
 
 ## Run locally
 
 ### Prerequisites
 
-- Linux or macOS with Python **3.11+**.
-- Node.js **22+** and npm.
+- Linux or macOS, Python **3.11+**, Node.js **22+**, and npm.
 - PostgreSQL server tools: `initdb`, `pg_ctl`, `createdb`, and `psql`.
-- A Nebius API key for live semantic review; local/manual review is available without one.
+- Optional: **Tesseract** (`tesseract-ocr`, English data) for image campaigns.
+- Optional: a Nebius API key for live semantic review. Local and manual review work without one.
 
-The recorded integration environment used Python 3.14, Node.js 24, and PostgreSQL 18.
-
-### First-time setup
+### Start
 
 ```bash
 git clone https://github.com/Sanath-Reddy/code-catalyst.git
@@ -190,104 +150,112 @@ cd code-catalyst
 python3 -m venv .venv
 .venv/bin/python -m pip install -r apps/api/requirements.lock
 npm --prefix apps/web ci
-```
-
-For live Nebius review, create a private `.env` from [.env.example](.env.example) and set `NEBIUS_API_KEY`. Keep the provider key on the server; do not place it in a `VITE_*` variable or commit it.
-
-Start the app:
-
-```bash
 python3 scripts/dev_local.py
 ```
 
-Open **http://localhost:5183**. In another terminal, retrieve the generated local accounts:
+Open **http://localhost:5183** and get the generated accounts with `python3 scripts/dev_local.py accounts`.
 
-```bash
-python3 scripts/dev_local.py accounts
-```
+The launcher sets up everything on first run:
 
-The launcher starts its own loopback PostgreSQL instance, applies migrations, provisions a fictional workspace and approved source on first use, builds the frontend, and starts the API and worker. Nebius and the local workspace policy are enabled by default. Starting the app alone makes no inference request.
+- It starts its own loopback PostgreSQL and applies the migrations.
+- It creates a fictional workspace with an approved source.
+- It builds the frontend and starts the API and worker.
 
-To use local/manual checks only:
+Data and logs persist under the ignored `.local/dev/` folder. Press **Ctrl+C** to stop. Useful options:
 
 ```bash
 python3 scripts/dev_local.py --local-only
 ```
 
-On later runs, use the same startup command. Press **Ctrl+C** in its terminal to stop its services; accounts, campaigns, logs, and database files persist under ignored `.local/dev/`.
-
-Default ports are **5183** for the website, **8013** for the API, and **55441** for PostgreSQL. If occupied:
-
 ```bash
 python3 scripts/dev_local.py --db-port 55442 --api-port 8014 --web-port 5184
 ```
 
-See [local development](docs/LOCAL_DEVELOPMENT.md) for logs, restart behavior, and PostgreSQL tool discovery.
+For live Nebius review, copy [.env.example](.env.example) to `.env` and set `NEBIUS_API_KEY`. Never put the key in a `VITE_*` variable. There is more detail in [docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    Web[React review workspace] --> API[FastAPI: identity and workflow]
-    API --> DB[(PostgreSQL: sources, revisions, jobs and evidence)]
-    DB --> Worker[Background review worker]
-    Worker --> Local[Deterministic review engine]
-    Worker -->|Policy enabled and external review selected| Nebius[Nebius semantic review]
-    Local --> Validation[Server validates findings and evidence]
+    Web[React review workspace] --> API[FastAPI: identity, workflow, policy]
+    API --> DB[(PostgreSQL: sources, revisions, jobs, evidence)]
+    DB --> Worker[Supervised worker]
+    Worker --> Local[Deterministic engine + Tesseract OCR]
+    Worker -->|Policy enabled and selected| Nebius[Nebius semantic review]
+    Local --> Validation[Server validates findings and quotes]
     Nebius --> Validation
     Validation --> DB
     API --> Human[Assigned human reviewer]
-    Human --> Export[Approved revision and audit export]
+    Human --> Export[Approved revision, audit record, verify page]
 ```
 
-| Layer | Technology / responsibility |
+| Layer | Technology and responsibility |
 |---|---|
-| Frontend | React, TypeScript, React Router, Vite; campaign, source, and review interfaces. |
-| API | Python, FastAPI, Pydantic, SQLAlchemy, Alembic; authoritative permissions and workflow checks. |
-| Persistence | PostgreSQL; versioned sources, revisions, review jobs, decisions, and evidence. |
-| Review engine | Local extraction and deterministic rules in `packages/review_engine`. |
-| Semantic review | Nebius Token Factory using `Qwen/Qwen3-235B-A22B-Instruct-2507`. |
-| Verification | pytest, Playwright, and Axe checks for tested UI states. |
-| Hosting configuration | Vercel frontend rewrites, a Render API/worker entrypoint, and Docker/Caddy alternatives. |
+| Frontend | React, TypeScript, React Router, and Vite, hosted on Vercel with `/api` rewrites and strict headers |
+| API | Python, FastAPI, Pydantic, SQLAlchemy, and Alembic (13 migrations). It holds the authoritative permissions and workflow checks. |
+| Worker | A separate supervised service with a heartbeat. It runs analyses, OCR, rechecks, retention purges, and the demo pool. |
+| Review engine | Extraction and deterministic rules in `packages/review_engine`. |
+| Semantic review | Nebius Token Factory, `Qwen/Qwen3-235B-A22B-Instruct-2507` (the evaluated alternative is `Qwen/Qwen3-30B-A3B-Instruct-2507`) |
+| Hosting | [render.yaml](render.yaml) defines the API and worker on Render with pre-deploy migrations, and [vercel.json](vercel.json) configures the frontend. Docker Compose and Caddy files are in `infra/`. |
 
-Nebius proposes findings; it does not approve or publish campaigns. The API validates finding structure and source references, and the assigned human reviewer makes the final decision.
+Nebius only proposes findings. The server validates every quote and citation, and the final decision belongs to a human reviewer.
 
 ### Repository structure
 
 ```text
-apps/web/                  React frontend and browser tests
-apps/api/brandguard/       API, identity, source and review workflows
-apps/api/tests/            API and database integration tests
-apps/worker/               Background review worker
-packages/review_engine/    Extraction and deterministic checks
+apps/web/                 React frontend and Playwright tests (e2e/)
+apps/api/brandguard/      API: identity, sources, review, images, documents, impact, requests, retention, demo
+apps/api/migrations/      Alembic migrations
+apps/api/tests/           API and database integration tests
+apps/worker/              Background worker
+packages/review_engine/   Extraction and deterministic checks
+evaluation/               Frozen benchmarks, fixtures, and committed results
 contracts/openapi.json    API contract
-verification/fixtures/    Fictional source packs and campaign examples
-tests/                    Engine, worker, infrastructure and other tests
-scripts/                  Local launcher, provisioning and verification tools
-infra/                    Containers, deployment and backup/restore tools
-docs/                     Architecture, setup, evidence and project records
+verification/             Fixtures, requirement register, and recorded evidence
+tests/                    Engine, worker, evaluation, and infrastructure tests
+scripts/                  Local launcher, smoke and synthetic checks, load test, packaging
+infra/                    Dockerfiles, Compose, Caddy, entrypoint, backup and restore
+docs/                     Architecture, contracts, walkthrough, and project records
 ```
 
-## Configuration and deployment
+## Configuration
 
-[.env.example](.env.example) documents the configuration names. Important server settings include `DATABASE_URL`, `PUBLIC_ORIGIN`, `APP_ENV`, `NEBIUS_API_KEY`, and `MODEL_*` limits. `PUBLIC_ORIGIN` must match the browser’s actual origin for session and CSRF checks.
+[.env.example](.env.example) lists every setting. The main ones are:
 
-The local launcher supplies its own database URL and browser origin. Its automatic policy setup applies only to its fictional local workspace. Hosted workspaces use the admin’s **Processing policy** controls.
+| Setting | Purpose |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string. |
+| `PUBLIC_ORIGIN` | Must match the browser's real origin, for session and CSRF checks. |
+| `APP_ENV` | `development` or `production`. |
+| `NEBIUS_API_KEY` | Server-side provider key. |
+| `MODEL_*` | Provider, model, timeout, input and output limits, and the daily run limit. |
+| `TRUST_PROXY_HEADERS=1` | Use only behind a proxy that overwrites `X-Forwarded-For` (Vercel → Render). |
+| `OCR_ENABLED` | Set to `0` to turn off image OCR. |
+| `DEMO_SANDBOXES_ENABLED` / `DEMO_POOL_SIZE` | Turn private demo sandboxes on or off, and set how many are kept ready. |
+| `RULE_DRAFTING_ENABLED=1` | Turns on AI rule drafting from brand books. Off by default. |
+| `SEED_PASSWORD` | When set, seeds the shared evaluation workspace on deploy. |
+| `GIT_COMMIT_SHA` | Reported by `/api/v1/health/version`. Render sets its own equivalent. |
 
-The repository includes Vercel `/api` rewrites to the Render backend and an [API/worker entrypoint](infra/entrypoint.sh). For a separate Docker-based local setup, see [the judge and deployment notes](docs/JUDGE_WALKTHROUGH.md). A successful frontend deployment or API readiness response alone does not verify worker execution or provider connectivity; complete the review journey above as well.
+Health endpoints: `/api/v1/health/ready`, `/api/v1/health/worker`, and `/api/v1/health/version`.
+
+## Evaluation
+
+The benchmarks are frozen: each dataset's SHA is committed before it is run. The data is synthetic and fictional, and the results are in [evaluation/results/](evaluation/results/).
+
+| Benchmark | Command | Result |
+|---|---|---|
+| Text review v2: 60 campaigns, held-out split | `python -m evaluation.benchmark_v2` | Precision 1.00 (CI 0.90–1.00), recall 0.97 (CI 0.86–1.00). No false "clean" result on the held-out split. |
+| Guideline impact: 30 campaigns × 5 changes | `python -m evaluation.impact_benchmark` | 53 of 85 re-reviews avoided (62%) compared with invalidating the whole brand. 1 labelled approval missed. |
+| OCR: 20 synthetic ad graphics | `python -m evaluation.ocr_benchmark` | Character error rate 0.136, word error rate 0.144. Lines read exactly: 79% overall, 44% when contrast is below 3:1. |
+| Comparison runner: 24 seeded regressions | `python -m evaluation.comparison_benchmark` | 24 of 24 caught, 0 false alarms. |
 
 ## Testing
 
-### Frontend checks
-
 ```bash
-npm --prefix apps/web run build
-npm --prefix apps/web run lint
+npm --prefix apps/web run build && npm --prefix apps/web run lint
 ```
 
-### Python integration suite
-
-Create a **separate, disposable UTF-8 PostgreSQL test database** named `brandguard_s1_test`. Replace the connection placeholders below with its credentials. The suite resets fixtures; use the isolated test database.
+The Python suite needs a **separate, disposable** UTF-8 PostgreSQL database, because it resets fixtures:
 
 ```bash
 export TEST_DATABASE_URL='postgresql+psycopg://USER:PASSWORD@127.0.0.1:5432/brandguard_s1_test'
@@ -295,70 +263,51 @@ DATABASE_URL="$TEST_DATABASE_URL" .venv/bin/alembic -c apps/api/alembic.ini upgr
 DATABASE_URL="$TEST_DATABASE_URL" .venv/bin/pytest apps/api/tests tests -q
 ```
 
-### Browser and live-provider checks
-
-Follow [the executable browser setup](tests/e2e/README.md) to prepare a separate browser-test database, fixture accounts, API, worker, and built frontend. With that stack running:
+For the browser tests, prepare the stack described in [tests/e2e/README.md](tests/e2e/README.md), then run:
 
 ```bash
 npm --prefix apps/web exec -- playwright test --config apps/web/playwright.config.ts --reporter=list
 ```
 
-The live Nebius test is opt-in. Run it only against the prepared fictional workspace with the worker’s provider key configured:
+The live Nebius test (`LIVE_NEBIUS=1 … nebius.spec.ts`) is opt-in and makes a real, paid provider request.
 
-```bash
-LIVE_NEBIUS=1 npm --prefix apps/web exec -- playwright test nebius.spec.ts --config apps/web/playwright.config.ts --reporter=list
-```
+[GitHub Actions](https://github.com/Sanath-Reddy/code-catalyst/actions) runs four workflows:
 
-It checks browser policy enablement, the default external-review selection, worker execution, model findings, and semantic coverage. It makes a real paid provider request. The ordinary suite skips this test.
+- **Backend integration**: migrations, `alembic check`, and pytest on PostgreSQL 18.
+- **Planning coverage**: checks the requirement-to-evidence mapping.
+- **Dependency audit**: `pip-audit` and `npm audit`, weekly and on every push.
+- **Synthetic journey**: every 30 minutes, once the `BRANDGUARD_URL` repository variable is set.
 
-### Planning checks and CI
-
-```bash
-python3 scripts/verify_plan.py
-python3 -m unittest discover -s scripts -p 'test_verify_plan.py'
-```
-
-Planning checks validate requirement/evidence mapping. They do not execute the product or establish deployment readiness. [GitHub Actions](https://github.com/Sanath-Reddy/code-catalyst/actions) runs the repository’s configured planning and integration workflows.
+Dependabot keeps the dependencies up to date.
 
 ## Scope and limitations
 
-- This is a hackathon prototype using fictional evaluation data. Model suggestions and valid citations still require human judgment.
-- The integrated web journey accepts text and `.txt`/`.md` imports. Extraction-library support for other formats does not mean the website provides PDF/image upload and review.
-- Missing, failed, or stale category checks remain visible. A zero-finding result is not proof of complete coverage or universal compliance.
-- The JSON export is an audit record of an approved revision, not a digitally signed certificate or a guarantee that a marketing claim is true.
-- Selected keyboard, accessibility, and responsive states are tested; this is not a claim of complete WCAG certification or independently measured model accuracy.
-- Historical PDFs, handoffs, and verification reports describe their recorded revisions. Consult their dates and scope alongside the current source and executable tests.
+- This is a hackathon prototype that uses fictional data. Model suggestions, and even valid citations, still need human judgement.
+- OCR is less reliable on low-contrast text, and uncertain regions stay flagged for a person to check. Logo placement is not certified automatically.
+- A zero-finding result doesn't prove full coverage or compliance. Missing, failed, or stale checks stay visible.
+- The JSON export is an audit record that the verify page can check. It is not a digitally signed certificate, and it doesn't prove a marketing claim is true.
+- Benchmark numbers come from small synthetic datasets with confidence intervals. They are not independent accuracy measurements.
+- Historical PDFs, handoffs, and verification reports describe the revision they were written for.
 
 ## Further documentation
 
-- [Judge walkthrough and deployment notes](docs/JUDGE_WALKTHROUGH.md)
-- [Persistent local development](docs/LOCAL_DEVELOPMENT.md)
-- [Executable browser verification](tests/e2e/README.md)
-- [Source pack used in the demo](verification/fixtures/lumadesk.json)
-- [Architecture details](docs/ARCHITECTURE.md) and [integration contracts](docs/CONTRACTS.md)
-- [Experiments and verification notes](docs/EXPERIMENTS.md)
-- [Dated integration report](docs/INTEGRATION_REPORT.md)
-- [Implemented features](docs/COMPLETED_FEATURES.md) and [changes from Round 1](docs/CHANGELOG_FROM_ROUND1.md)
-- [Model plan](docs/MODEL_PLAN.md), [technology/AI disclosures](docs/DISCLOSURES.md), and [contribution record](docs/CONTRIBUTIONS.md)
-- [Implementation plan](docs/IMPLEMENTATION_PLAN.md), [verification specification](docs/VERIFICATION.md), and [requirement register](verification/requirements.json)
-- [Round 3 improvement plan](docs/ROUND3_IMPROVEMENTS.md) and [submission status](docs/SUBMISSION_STATUS.md)
+- [Judge walkthrough and deployment notes](docs/JUDGE_WALKTHROUGH.md) · [Local development](docs/LOCAL_DEVELOPMENT.md) · [Browser verification](tests/e2e/README.md)
+- [Architecture](docs/ARCHITECTURE.md) · [Contracts](docs/CONTRACTS.md) · [Model plan](docs/MODEL_PLAN.md) · [Experiments](docs/EXPERIMENTS.md)
+- [Round 3 improvements](docs/ROUND3_IMPROVEMENTS.md) · [Completed features](docs/COMPLETED_FEATURES.md) · [Changes from Round 1](docs/CHANGELOG_FROM_ROUND1.md)
+- [Disclosures](docs/DISCLOSURES.md) · [Contributions](docs/CONTRIBUTIONS.md) · [Requirement register](verification/requirements.json)
 
 ## Team
 
 Built by **CODE CATALYST**:
 
-- **Sanath Reddy** — backend, workflow/security boundaries, integration, and verification.
-- **Darshilkumar** — frontend, source/review interfaces, and judge-facing experience.
-- **Surya Prakash** — extraction, deterministic checks, worker, and infrastructure.
+- **Sanath Reddy**: backend, workflow and security boundaries, integration, and verification.
+- **Darshilkumar**: frontend, source and review interfaces, and the judge-facing experience.
+- **Surya Prakash**: extraction, deterministic checks, OCR, the worker, and infrastructure.
 
-The [contribution record](docs/CONTRIBUTIONS.md) contains the detailed history; [disclosures](docs/DISCLOSURES.md) record development assistance and dependency provenance.
+## Feedback
 
-## Feedback and contributions
-
-Use [GitHub Issues](https://github.com/Sanath-Reddy/code-catalyst/issues) to report a problem or suggest an improvement. Include the role, steps to reproduce, expected behavior, actual behavior, and a screenshot or request ID where useful. Keep provider keys and private data out of reports.
-
-For code changes, set up the local workspace, keep the change focused, add relevant regression coverage, and run the checks appropriate to the affected area. Explain the behavior and validation in the pull request.
+Report problems in [GitHub Issues](https://github.com/Sanath-Reddy/code-catalyst/issues). Include the role, the steps you took, what you expected and what happened, and a request ID if you have one. Don't include provider keys or private data.
 
 ## License
 
-A project license has not yet been added to this repository. Third-party dependency licenses and reuse disclosures are recorded in [docs/DISCLOSURES.md](docs/DISCLOSURES.md).
+[MIT](LICENSE). Third-party licences and disclosures are recorded in [docs/DISCLOSURES.md](docs/DISCLOSURES.md).

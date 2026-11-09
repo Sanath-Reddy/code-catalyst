@@ -136,7 +136,7 @@ def background(spec, size, rng):
 
 def mean_colour(image, box):
     crop = image.crop(box).resize((8, 8))
-    pixels = list(crop.getdata())
+    pixels = list(crop.get_flattened_data())
     return tuple(round(sum(p[k] for p in pixels) / len(pixels)) for k in range(3))
 
 

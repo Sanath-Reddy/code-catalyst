@@ -24,7 +24,7 @@ Prepared 23 October 2026 against implementation baseline `b5999b2`. **Not ready 
 | Darshilkumar | D5/D6: keyboard/zoom/focus, consented feedback, updated PDF | Actual observations and fixes; participant/sample limitations; rendered PDF and verified links. Do not expose private participant details. |
 | Surya + Sanath | Private file intake and lifecycle integration | Completed bounded extraction (P1) and snapshot retention/expiry (P5, `infra/backup.py`, `infra/restore.py`). Live bucket integration: Sanath. |
 | Surya | P4: frozen evaluation and latency/load | Completed: 20-item frozen benchmark (`evaluation/fixtures/dev_cases.json`), 100% precision/recall, template split, latency profiling (`verification/evidence/t23_evaluation.json`). |
-| Surya | P5/P6: runtime packaging, HTTPS and recovery | Completed: 4-service Docker Compose (`infra/compose.yaml`), Caddyfile reverse proxy, healthcheck probe, Case T18/T21 backup/restore, terms/license ledger (`Surya's handoff/P6_HANDOFF.md`). |
+| Surya | P5/P6: runtime packaging, HTTPS and recovery | Completed: 4-service Docker Compose (`infra/compose.yaml`), Caddyfile reverse proxy, healthcheck probe, Case T18/T21 backup/restore, terms/license ledger (`docs/archive/handoffs/P6_HANDOFF.md`). |
 | Sanath | S6 final assembly and coordination | Release evidence at actual tested SHA, member confirmations/peer review, repository/form access and final submission confirmation. |
 
 
@@ -57,4 +57,4 @@ The fixed allowlist contains proposal/brief, technical and submission records, c
 
 Supplied form: `https://forms.gle/gyRiHtQT3AnC3MdV6`. A read-only web-tool attempt on 23 October 2026 could not access it; extra fields and upload restrictions remain unverified. Sanath should open it interactively before final assembly and record additional requirements here. No form submission has occurred.
 
-The supplied `round 2.txt` closes Round 2 on 25 October at 10:00 AM IST (2026 from event context). Team target remains 08:00 AM IST; confirm subsequent announcements. Keep personal registration fields and submission receipt in private team records. At submission, record public release SHA/tag, final artifact hashes, verified judge URL, verification actor/time and private receipt location. Leave absent fields pending.
+The supplied `docs/archive/round2.txt` closes Round 2 on 25 October at 10:00 AM IST (2026 from event context). Team target remains 08:00 AM IST; confirm subsequent announcements. Keep personal registration fields and submission receipt in private team records. At submission, record public release SHA/tag, final artifact hashes, verified judge URL, verification actor/time and private receipt location. Leave absent fields pending.

@@ -15,3 +15,10 @@ models.txt
 
 # Local /brag video projects, media, renders and supporting files.
 /brag-output/
+
+# Local working files: overnight session logs, PDF scratch builds and screenshots.
+/.overnight/
+/tmp/
+/output/
+/complaints/
+/improv.pdf

@@ -292,7 +292,7 @@ def measure_region_colours(image_bytes, region_map):
             crop = image.crop((left, top, min(right, width), min(bottom, height)))
             crop.thumbnail((240, 80))
             w, h = crop.size
-            pixels = list(crop.getdata())
+            pixels = list(crop.get_flattened_data())
             edge = [pixels[y * w + x] for y in range(h) for x in range(w) if x in (0, w - 1) or y in (0, h - 1)]
             background = tuple(_median([p[i] for p in edge]) for i in range(3))
             bg_lum = relative_luminance(background)
